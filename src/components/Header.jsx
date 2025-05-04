@@ -20,7 +20,6 @@ import {
 import { useLocation, useNavigate } from "react-router";
 
 import useStore from "../store/store";
-import { useApp } from "../AppProvider";
 import { useQuery } from "react-query";
 
 async function fetchNotis() {

@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import useWebSocket, { ReadyState } from "react-use-websocket";
-import { useApp } from "./AppProvider";
 import { useQueryClient } from "react-query";
+import useStore from "./store/store";
 
 export default function AppSocket() {
-  const { auth } = useApp();
+  const auth = useStore((state) => state.auth);
   const queryClient = useQueryClient();
   const { readyState, sendJsonMessage, lastJsonMessage } = useWebSocket(
     import.meta.env.VITE_WS

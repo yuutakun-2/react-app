@@ -9,12 +9,7 @@ import AppRouter from "./AppRouter";
 import AppSocket from "./AppSocket";
 import useStore from "./store/store";
 
-const AppContext = createContext();
 const queryClient = new QueryClient();
-
-export function useApp() {
-  return useContext(AppContext);
-}
 
 export default function AppProvider() {
   const mode = useStore((state) => state.mode);
@@ -48,14 +43,12 @@ export default function AppProvider() {
   }, [mode]);
 
   return (
-    <AppContext.Provider>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme={theme}>
-          <AppRouter />
-          <AppSocket />
-          <CssBaseline />
-        </ThemeProvider>
-      </QueryClientProvider>
-    </AppContext.Provider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <AppRouter />
+        <AppSocket />
+        <CssBaseline />
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }

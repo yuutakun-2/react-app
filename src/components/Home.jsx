@@ -2,7 +2,6 @@ import Item from "./Item";
 import Form from "./Form";
 import { Typography } from "@mui/material";
 import { useQuery, useMutation, useQueryClient } from "react-query";
-import { useApp } from "../AppProvider";
 import useStore from "../store/store";
 
 async function fetchPosts() {
@@ -24,7 +23,7 @@ async function deletePost(id) {
 
 export default function Home() {
   const queryClient = useQueryClient();
-  const { auth } = useApp();
+  const auth = useStore((state) => state.auth);
   const showForm = useStore((state) => state.showForm);
   const { data, error, isLoading } = useQuery("posts", fetchPosts);
 
