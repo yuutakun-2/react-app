@@ -3,6 +3,7 @@ import Form from "./Form";
 import { Typography } from "@mui/material";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { useApp } from "../AppProvider";
+import useStore from "../store/store";
 
 async function fetchPosts() {
   const res = await fetch(`${import.meta.env.VITE_API}/posts`);
@@ -23,7 +24,8 @@ async function deletePost(id) {
 
 export default function Home() {
   const queryClient = useQueryClient();
-  const { showForm, auth } = useApp();
+  const { auth } = useApp();
+  const showForm = useStore((state) => state.showForm);
   const { data, error, isLoading } = useQuery("posts", fetchPosts);
 
   // useMutation accepts two parameters:
@@ -46,7 +48,7 @@ export default function Home() {
 
   // တချို့နေရာတွေမှာ Data မရောက်သေးဘဲ Component ကို အသုံးပြုမိရင် Error တက်နိုင်ပါတယ်။ ဒါကြောင့် ဒီပြဿနာကို ထည့်ဖြေရှင်းဖို့လိုပါတယ်။ ဒါကြောင့် Home.jsx ကို အခုလိုပြင်လိုက်ပါ။
   if (error) {
-    return <Typography>{error}</Typography>;
+    return <Typography>Error</Typography>;
   }
   if (isLoading) {
     return <Typography>Loading...</Typography>;

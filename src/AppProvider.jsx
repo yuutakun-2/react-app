@@ -16,7 +16,7 @@ export function useApp() {
 }
 
 export default function AppProvider() {
-  const [showForm, setShowForm] = useState(false);
+  // const [showForm, setShowForm] = useState(false);
   const [showDrawer, setShowDrawer] = useState(false);
   const [mode, setMode] = useState("dark");
   const [auth, setAuth] = useState(false);
@@ -53,8 +53,8 @@ export default function AppProvider() {
       value={{
         showDrawer,
         setShowDrawer,
-        showForm,
-        setShowForm,
+        // showForm,
+        // setShowForm,
         mode,
         setMode,
         auth,

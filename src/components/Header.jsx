@@ -19,6 +19,7 @@ import {
 
 import { useLocation, useNavigate } from "react-router";
 
+import useStore from "../store/store";
 import { useApp } from "../AppProvider";
 import { useQuery } from "react-query";
 
@@ -34,8 +35,10 @@ async function fetchNotis() {
 }
 
 export default function Header() {
-  const { showForm, setShowForm, mode, setMode, setShowDrawer, auth } =
+  const { mode, setMode, setShowDrawer, auth } =
     useApp();
+  const showForm = useStore((state) => state.showForm);
+  const setShowForm = useStore((state) => state.setShowForm)
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { isLoading, isError, data } = useQuery(["notis", auth], fetchNotis);
