@@ -52,9 +52,7 @@ const unlikePost = async (postId) => {
 };
 
 export default function Item({ post, remove }) {
-  const { auth } = useStore((state) => ({
-    auth: state.auth,
-  }));
+  const auth = useStore((state) => state.auth);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
