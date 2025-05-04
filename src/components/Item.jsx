@@ -18,8 +18,6 @@ import {
 import { useNavigate } from "react-router";
 import { blue } from "@mui/material/colors";
 
-import { useApp } from "../AppProvider";
-
 import { useMutation, useQueryClient } from "react-query";
 
 const likePost = async (postId) => {
@@ -53,7 +51,9 @@ const unlikePost = async (postId) => {
 };
 
 export default function Item({ post, remove }) {
-  const { auth } = useApp();
+  const { auth } = useStore((state) => ({
+    auth: state.auth,
+  }));
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 

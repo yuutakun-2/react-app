@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useMemo, useEffect } from "react";
+import { createContext, useContext, useMemo, useEffect } from "react";
 
 import { createTheme, ThemeProvider, CssBaseline } from "@mui/material";
 
@@ -7,6 +7,7 @@ import { QueryClientProvider, QueryClient } from "react-query";
 import AppRouter from "./AppRouter";
 
 import AppSocket from "./AppSocket";
+import useStore from "./store/store";
 
 const AppContext = createContext();
 const queryClient = new QueryClient();
@@ -16,10 +17,8 @@ export function useApp() {
 }
 
 export default function AppProvider() {
-  // const [showForm, setShowForm] = useState(false);
-  const [showDrawer, setShowDrawer] = useState(false);
-  const [mode, setMode] = useState("dark");
-  const [auth, setAuth] = useState(false);
+  const mode = useStore((state) => state.mode);
+  const setAuth = useStore((state) => state.setAuth);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -49,18 +48,7 @@ export default function AppProvider() {
   }, [mode]);
 
   return (
-    <AppContext.Provider
-      value={{
-        showDrawer,
-        setShowDrawer,
-        // showForm,
-        // setShowForm,
-        mode,
-        setMode,
-        auth,
-        setAuth,
-      }}
-    >
+    <AppContext.Provider>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={theme}>
           <AppRouter />

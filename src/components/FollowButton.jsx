@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import { useMutation, useQueryClient } from "react-query";
-import { useApp } from "../AppProvider";
+import useStore from "../store/store";
 
 async function followUser(id) {
   const token = localStorage.getItem("token");
@@ -28,7 +28,9 @@ async function unfollowUser(id) {
 
 export default function FollowButton({ user }) {
   const queryClient = useQueryClient();
-  const { auth } = useApp();
+  const {auth } = useStore((state) => ({
+    auth: state.auth,
+  }));
   const isFollowed = user.followers?.some((f) => f.followerId === auth?.id);
 
   if (auth?.id === user.id) {

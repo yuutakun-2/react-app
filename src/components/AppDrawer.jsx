@@ -18,13 +18,15 @@ import {
   Logout as LogoutIcon,
 } from "@mui/icons-material";
 
-import { useState } from "react";
 import { useNavigate } from "react-router";
-
-import { useApp } from "../AppProvider";
+import useStore from "../store/store";
 
 export default function AppDrawer() {
-  const { showDrawer, setShowDrawer, auth, setAuth } = useApp();
+  const showDrawer = useStore((state) => state.showDrawer);
+  const setShowDrawer = useStore((state) => state.setShowDrawer);
+  const auth = useStore((state) => state.auth);
+  const setAuth = useStore((state) => state.setAuth);
+  
   const navigate = useNavigate();
 
   const toggleDrawer = (newOpen) => () => {

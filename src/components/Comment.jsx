@@ -1,9 +1,9 @@
 import { Box, Card, IconButton, Typography, Avatar } from "@mui/material";
 import { Delete as DeleteIcon } from "@mui/icons-material";
-import { useApp } from "../AppProvider";
 import { blue } from "@mui/material/colors";
 import { useMutation } from "react-query";
 import { useQueryClient } from "react-query";
+import useStore from "../store/store";
 
 async function deleteComment(commentId) {
   const token = localStorage.getItem("token");
@@ -20,7 +20,9 @@ async function deleteComment(commentId) {
 }
 
 export default function Comment({ comment }) {
-  const { auth } = useApp();
+  const { auth } = useStore((state) => ({
+    auth: state.auth,
+  }));
   const queryClient = useQueryClient();
 
   const remove = useMutation(deleteComment, {

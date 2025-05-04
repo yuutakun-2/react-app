@@ -1,8 +1,8 @@
 import { Box, Typography, Button, Alert, OutlinedInput } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { useApp } from "../AppProvider";
 import { useNavigate } from "react-router";
 import { useMutation } from "react-query";
+import useStore from "../store/store";
 
 async function postLogin(data) {
   const res = await fetch(`${import.meta.env.VITE_API}/login`, {
@@ -21,7 +21,9 @@ async function postLogin(data) {
 }
 
 export default function Login() {
-  const { setAuth } = useApp();
+  const { setAuth } = useStore((state) => ({
+    setAuth: state.setAuth,
+  }));
   const navigate = useNavigate();
   const {
     register,

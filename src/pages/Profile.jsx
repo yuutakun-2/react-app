@@ -5,7 +5,6 @@ import FollowButton from "../components/FollowButton";
 
 import { useQuery } from "react-query";
 import { useParams } from "react-router";
-import { useApp } from "../AppProvider";
 
 async function fetchUser(id) {
   const res = await fetch(`${import.meta.env.VITE_API}/users/${id}`);

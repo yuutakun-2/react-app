@@ -35,10 +35,13 @@ async function fetchNotis() {
 }
 
 export default function Header() {
-  const { mode, setMode, setShowDrawer, auth } =
-    useApp();
+  const mode = useStore((state) => state.mode);
+  const setMode = useStore((state) => state.setMode);
+  const setShowDrawer = useStore((state) => state.setShowDrawer);
+  const auth = useStore((state) => state.auth);
   const showForm = useStore((state) => state.showForm);
-  const setShowForm = useStore((state) => state.setShowForm)
+  const setShowForm = useStore((state) => state.setShowForm);
+  
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { isLoading, isError, data } = useQuery(["notis", auth], fetchNotis);
